@@ -3,7 +3,6 @@ package com.example.weight_converter
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -64,6 +63,20 @@ fun WeightConverterApp() {
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
+            OutlinedTextField(
+                value = weight,
+                onValueChange = {
+                    weight = it.filter { c -> c.isDigit() || c == '.' }
+                    calculateResult()
+                },
+                label = {
+                    Text(
+                        "Peso em $unit",
+                    )
+                },
+                singleLine = true,
+                modifier = Modifier.fillMaxWidth()
+            )
             ExposedDropdownMenuBox(
                 expanded = expanded,
                 onExpandedChange = { expanded = !expanded },
@@ -112,32 +125,14 @@ fun WeightConverterApp() {
                     )
                 }
             }
-
-            OutlinedTextField(
-                value = weight,
-                onValueChange = {
-                    weight = it.filter { c -> c.isDigit() || c == '.' }
-                    calculateResult()
-                },
-                label = {
-                    Text(
-                        "Peso em $unit",
-                    )
-                },
-                singleLine = true,
-                modifier = Modifier.fillMaxWidth()
+            Text(
+                "Convertido: ${if (result.isNotEmpty()) result else ""}",
             )
-
-            if (result.isNotEmpty()) {
-                Text(
-                    "Convertido: $result",
-                )
-            }
         }
     }
 }
 
-@Preview(showBackground = true)
+a@Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     Weight_converterTheme {

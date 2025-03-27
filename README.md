@@ -8,7 +8,7 @@ This is a documentation of the **weight_converter** project, which includes a mo
 
 ## Project Statistics
 
-- **Lines of code**: 250
+- **Lines of code**: 245
 - **Files**: 4
 - **Folders**: 2
 - **Screens**: 1
